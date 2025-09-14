@@ -3,11 +3,13 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
+import CartDrawer from "./components/CartDrawer";
 
 export default function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
+      <CartDrawer />
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />

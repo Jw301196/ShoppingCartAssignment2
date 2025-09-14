@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { useToast } from "../components/Toast";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -8,6 +9,7 @@ export default function ProductDetail() {
   const [qty, setQty] = useState(1);
   const [err, setErr] = useState(null);
   const { addToCart } = useCart();
+  const { push } = useToast();
 
   useEffect(() => {
     (async () => {
@@ -50,7 +52,13 @@ export default function ProductDetail() {
             onChange={(e) => setQty(Math.max(1, Number(e.target.value)))}
           />
           <button
-            onClick={() => addToCart(product, qty)}
+            onClick={() => {
+              addToCart(product, qty);
+              push({
+                title: "Added to cart",
+                description: `${qty} × ${product.title}`,
+              });
+            }}
             className="bg-indigo-600 text-white rounded-lg px-4 py-2 hover:bg-indigo-700"
           >
             Add to cart

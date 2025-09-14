@@ -1,8 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { useUi } from "../context/UIContent";
 
 export default function Navbar() {
   const { totalCount } = useCart();
+  const { toggleCart } = useUi();
 
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-40">
@@ -18,6 +20,12 @@ export default function Navbar() {
             Products
           </NavLink>
           <Link to="/cart" className="relative inline-flex items-center">
+            <button
+              type="button"
+              onClick={toggleCart}
+              className="relative inline-flex items-center"
+              aria-label="Open cart"
+            ></button>
             <span className="material-symbols-outlined">shopping_cart</span>
             {totalCount > 0 && (
               <span
